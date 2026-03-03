@@ -1,0 +1,15 @@
+{
+  "name": "agent-mcps",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Project-local MCP catalog and installers for Claude, Codex, and Cursor.",
+  "bin": {
+    "agent-mcps": "./bin/agent-mcps.mjs"
+  },
+  "scripts": {
+    "validate": "node scripts/validate-catalog.mjs",
+    "add": "node scripts/add-mcp.mjs",
+    "sync": "node scripts/sync-mcp.mjs",
+    "cli": "node bin/agent-mcps.mjs"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "servers": [
+    {
+      "id": "chrome-devtools",
+      "description": "MCP server for Chrome DevTools browser debugging and automation.",
+      "transport": "stdio",
+      "command": "npx",
+      "args": [
+        "chrome-devtools-mcp@0.18.1"
+      ],
+      "envVars": [],
+      "clients": [
+        "claude",
+        "codex",
+        "cursor"
+      ],
+      "enabled": true,
+      "versionPolicy": "pinned"
+    }
+  ]
+}
