@@ -1,0 +1,9 @@
+# MCP Catalog
+
+This table is the quick reference for all MCP servers in this catalog.
+
+When adding/removing servers in `catalog/servers.json`, update this table in the same change.
+
+| Name | Install command | Source |
+| --- | --- | --- |
+| `chrome-devtools` | `agent-mcps add chrome-devtools -a claude -a codex -a cursor` | https://github.com/ChromeDevTools/chrome-devtools-mcp |

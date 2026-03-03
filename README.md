@@ -2,7 +2,31 @@
 
 Project-local MCP catalog and installers for Claude, Codex, and Cursor.
 
-## Global local usage with pnpm (no publish)
+## Install on another machine
+
+### Option A: clone + global link (recommended)
+
+```bash
+git clone <YOUR_REPO_URL> ~/agent-mcps
+cd ~/agent-mcps
+pnpm link --global
+which agent-mcps
+agent-mcps --help
+```
+
+### Option B: global install directly from git URL
+
+```bash
+pnpm add -g git+https://github.com/<org>/<repo>.git
+# private repo option:
+# pnpm add -g git+ssh://git@github.com/<org>/<repo>.git
+which agent-mcps
+agent-mcps --help
+```
+
+Update later by re-running the same `pnpm add -g ...` command.
+
+## Global local usage with pnpm (current machine)
 
 Use this repo as a global CLI from your machine:
 
@@ -40,6 +64,8 @@ Two workflows:
 `--target` is optional. If omitted, the current directory is used.
 `-a` can be repeated per agent, for example `-a claude -a codex`.
 If no `-a` flags are provided in an interactive terminal, a checklist UI appears (space to select, enter to confirm).
+
+MCP catalog table lives in [catalog/README.md](/Users/robot/Documents/Projects/agent-mcps/catalog/README.md).
 
 ## Commands
 
