@@ -2,7 +2,7 @@
 
 Project-local MCP catalog and installers for Claude, Codex, and Cursor.
 
-## Install on another machine
+## Install
 
 ### Option A: clone + global link (recommended)
 
@@ -26,24 +26,12 @@ agent-mcps --help
 
 Update later by re-running the same `pnpm add -g ...` command.
 
-## Global local usage with pnpm (current machine)
+Use in any project directory:
 
-Use this repo as a global CLI from your machine:
-
-1. Link this local clone globally (recommended for live updates):
-`pnpm link --global`
-2. Verify:
-`which agent-mcps`
-3. Use in any project directory:
-`agent-mcps add chrome-devtools`
-4. Or full sync:
-`agent-mcps sync`
-5. Choose explicit agents:
+1. Add one server:
 `agent-mcps add chrome-devtools -a claude -a codex -a cursor`
-
-Alternative snapshot install from local path:
-
-`pnpm add -g /Users/robot/Documents/Projects/agent-mcps`
+2. Full sync from catalog:
+`agent-mcps sync`
 
 Uninstall/reset:
 
@@ -65,7 +53,7 @@ Two workflows:
 `-a` can be repeated per agent, for example `-a claude -a codex`.
 If no `-a` flags are provided in an interactive terminal, a checklist UI appears (space to select, enter to confirm).
 
-MCP catalog table lives in [catalog/README.md](/Users/robot/Documents/Projects/agent-mcps/catalog/README.md).
+MCP catalog table lives in `catalog/README.md`.
 
 ## Commands
 
