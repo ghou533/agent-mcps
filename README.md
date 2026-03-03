@@ -66,12 +66,6 @@ Global CLI:
 3. Full sync:
 `agent-mcps sync [--target /path] [-a <agent>]... [-y]`
 
-Legacy local scripts (still available):
-
-1. `npm run validate`
-2. `npm run add -- <server-id> --target /path`
-3. `npm run sync -- --target /path`
-
 ## Generated targets (under selected target path)
 
 1. Claude: `<target>/.mcp.json`
@@ -85,6 +79,14 @@ Use the wrapper so Codex uses project-local MCP config:
 cd /absolute/path/to/project
 ./scripts/codex-local mcp list
 ```
+
+## Existing files behavior
+
+1. `add` mode updates only the selected server key and preserves other existing MCP entries.
+2. Existing directories are reused (`.cursor`, `.codex`, `scripts`).
+3. Existing files are updated in place:
+`<target>/.mcp.json`, `<target>/.cursor/mcp.json`, `<target>/.codex/config.toml`.
+4. `sync` mode rewrites the managed client config files deterministically from the enabled catalog.
 
 ## Catalog format
 
