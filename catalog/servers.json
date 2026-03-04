@@ -17,6 +17,24 @@
       ],
       "enabled": true,
       "versionPolicy": "pinned"
+    },
+    {
+      "id": "svelte",
+      "description": "Official Svelte MCP server for Svelte and SvelteKit docs, autofixes, and playground links.",
+      "transport": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@sveltejs/mcp@0.1.11"
+      ],
+      "envVars": [],
+      "clients": [
+        "claude",
+        "codex",
+        "cursor"
+      ],
+      "enabled": true,
+      "versionPolicy": "pinned"
     }
   ]
 }

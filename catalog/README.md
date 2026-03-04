@@ -7,3 +7,4 @@ When adding/removing servers in `catalog/servers.json`, update this table in the
 | Name | Install command | Source |
 | --- | --- | --- |
 | `chrome-devtools` | `agent-mcps add chrome-devtools` | https://github.com/ChromeDevTools/chrome-devtools-mcp |
+| `svelte` | `agent-mcps add svelte` | https://svelte.dev/docs/ai/overview |
