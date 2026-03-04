@@ -10,6 +10,7 @@ const PACKAGE_JSON_PATH = path.join(REPO_ROOT, "package.json");
 
 const SUBCOMMAND_SCRIPTS = {
   add: path.join(REPO_ROOT, "scripts", "add-mcp.mjs"),
+  list: path.join(REPO_ROOT, "scripts", "list-mcp.mjs"),
   sync: path.join(REPO_ROOT, "scripts", "sync-mcp.mjs"),
   validate: path.join(REPO_ROOT, "scripts", "validate-catalog.mjs")
 };
@@ -19,6 +20,7 @@ function printUsage() {
 
 Usage:
   agent-mcps add <server-id> [--target /path] [-a <agent>]... [-y]
+  agent-mcps list [--json]
   agent-mcps sync [--target /path] [-a <agent>]... [-y]
   agent-mcps validate
 

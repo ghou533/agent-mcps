@@ -28,9 +28,11 @@ Update later by re-running the same `pnpm add -g ...` command.
 
 Use in any project directory:
 
-1. Add one server:
+1. List available servers:
+`agent-mcps list`
+2. Add one server:
 `agent-mcps add chrome-devtools -a claude -a codex -a cursor`
-2. Full sync from catalog:
+3. Full sync from catalog:
 `agent-mcps sync`
 
 Uninstall/reset:
@@ -61,9 +63,11 @@ Global CLI:
 
 1. Validate catalog:
 `agent-mcps validate`
-2. Add or update one server:
+2. List catalog servers:
+`agent-mcps list [--json]`
+3. Add or update one server:
 `agent-mcps add <server-id> [--target /path] [-a <agent>]... [-y]`
-3. Full sync:
+4. Full sync:
 `agent-mcps sync [--target /path] [-a <agent>]... [-y]`
 
 ## Generated targets (under selected target path)

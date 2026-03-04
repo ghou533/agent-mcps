@@ -8,6 +8,7 @@
   },
   "scripts": {
     "validate": "node scripts/validate-catalog.mjs",
+    "list": "node scripts/list-mcp.mjs",
     "add": "node scripts/add-mcp.mjs",
     "sync": "node scripts/sync-mcp.mjs",
     "cli": "node bin/agent-mcps.mjs"
