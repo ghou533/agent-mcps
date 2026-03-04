@@ -7,7 +7,7 @@ Project-local MCP catalog and installers for Claude, Codex, and Cursor.
 ### Option A: clone + global link (recommended)
 
 ```bash
-git clone <YOUR_REPO_URL> ~/agent-mcps
+git clone https://github.com/ghou533/agent-mcps.git ~/agent-mcps
 cd ~/agent-mcps
 pnpm link --global
 which agent-mcps
@@ -17,9 +17,9 @@ agent-mcps --help
 ### Option B: global install directly from git URL
 
 ```bash
-pnpm add -g git+https://github.com/<org>/<repo>.git
-# private repo option:
-# pnpm add -g git+ssh://git@github.com/<org>/<repo>.git
+pnpm add -g git+https://github.com/ghou533/agent-mcps.git
+# ssh option:
+# pnpm add -g git+ssh://git@github.com/ghou533/agent-mcps.git
 which agent-mcps
 agent-mcps --help
 ```
