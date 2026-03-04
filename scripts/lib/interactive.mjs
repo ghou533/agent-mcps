@@ -14,6 +14,7 @@ export async function selectAgentsInteractive(agents) {
   let cursor = 0;
   const selected = new Set(agents);
   let message = "";
+  let cleanedUp = false;
 
   function render() {
     const lines = [];
@@ -35,10 +36,15 @@ export async function selectAgentsInteractive(agents) {
   }
 
   function cleanup() {
+    if (cleanedUp) {
+      return;
+    }
+    cleanedUp = true;
     process.stdin.removeListener("keypress", onKeypress);
     if (!wasRaw) {
       process.stdin.setRawMode(false);
     }
+    process.stdin.pause();
     process.stdout.write("\x1b[2J\x1b[H");
   }
 
@@ -108,6 +114,7 @@ export async function selectAgentsInteractive(agents) {
       cleanup();
       process.stdout.write(`Selected agents: ${chosen.join(", ")}\n`);
       resolvePromise(chosen);
+      return;
     }
   }
 
