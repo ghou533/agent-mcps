@@ -75,19 +75,19 @@ Global CLI:
 1. Claude: `<target>/.mcp.json`
 2. Cursor: `<target>/.cursor/mcp.json`
 3. Codex: `<target>/.codex/config.toml`
-4. Codex project wrapper: `<target>/scripts/codex-local` and `<target>/scripts/codex-local.ps1`
+4. Codex project wrapper: `<target>/.agent-mcps/scripts/codex-local` and `<target>/.agent-mcps/scripts/codex-local.ps1`
 
 Use the wrapper so Codex uses project-local MCP config:
 
 ```bash
 cd /absolute/path/to/project
-./scripts/codex-local mcp list
+./.agent-mcps/scripts/codex-local mcp list
 ```
 
 ## Existing files behavior
 
 1. `add` mode updates only the selected server key and preserves other existing MCP entries.
-2. Existing directories are reused (`.cursor`, `.codex`, `scripts`).
+2. Existing directories are reused (`.cursor`, `.codex`, `.agent-mcps/scripts`).
 3. Existing files are updated in place:
 `<target>/.mcp.json`, `<target>/.cursor/mcp.json`, `<target>/.codex/config.toml`.
 4. `sync` mode rewrites the managed client config files deterministically from the enabled catalog.
