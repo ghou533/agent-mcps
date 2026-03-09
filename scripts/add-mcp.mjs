@@ -14,6 +14,7 @@ import {
 } from "./lib/common.mjs";
 import { indexServersById, loadCatalog, validateCatalog } from "./lib/catalog.mjs";
 import { parseCodexConfig, writeCodexConfig } from "./lib/codex-config.mjs";
+import { applyGlobalActions } from "./lib/global-actions.mjs";
 import { selectAgentsInteractive } from "./lib/interactive.mjs";
 import { writeCodexWrappers } from "./lib/wrappers.mjs";
 import { renderSingleClaudeServer } from "./renderers/claude.mjs";
@@ -21,7 +22,7 @@ import { renderSingleCodexServer } from "./renderers/codex.mjs";
 import { renderSingleCursorServer } from "./renderers/cursor.mjs";
 
 function usage() {
-  console.log("Usage: agent-mcps add <server-id> [--target /path] [-a <agent>]... [-y]");
+  console.log("Usage: agent-mcps add <server-id> [--target /path] [-a <agent>]... [--global] [-y]");
 }
 
 function ensureMcpJsonShape(value, filePath) {
@@ -80,6 +81,7 @@ if (positionals.length !== 1) {
 
 const serverId = positionals[0];
 const targetPath = parseTargetPath(options.target, { defaultToCwd: true });
+const useGlobal = Boolean(options.global || options.g);
 if (options.clients) {
   fail("`--clients` is not supported. Use `-a <agent>` for each target agent.");
 }
@@ -143,4 +145,23 @@ for (const client of selectedClients) {
 console.log(`Added/updated "${serverId}" for ${selectedClients.join(", ")} in ${targetPath}`);
 for (const filePath of written) {
   console.log(`- ${filePath}`);
+}
+
+if (useGlobal) {
+  const { written: globalWritten, unsupported } = await applyGlobalActions({
+    mode: "add",
+    selectedAgents: selectedClients,
+    server
+  });
+
+  if (globalWritten.length > 0) {
+    console.log("Global updates:");
+    for (const filePath of globalWritten) {
+      console.log(`- ${filePath}`);
+    }
+  }
+
+  if (unsupported.length > 0) {
+    console.log(`No global setup implemented yet for: ${unsupported.join(", ")}`);
+  }
 }

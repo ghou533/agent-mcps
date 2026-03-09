@@ -34,6 +34,8 @@ Use in any project directory:
 `agent-mcps add chrome-devtools -a claude -a codex -a cursor`
 3. Full sync from catalog:
 `agent-mcps sync`
+4. Add Codex global fallback (useful for Codex agent in Cursor):
+`agent-mcps add svelte -a codex --global`
 
 Uninstall/reset:
 
@@ -66,9 +68,9 @@ Global CLI:
 2. List catalog servers:
 `agent-mcps list [--json]`
 3. Add or update one server:
-`agent-mcps add <server-id> [--target /path] [-a <agent>]... [-y]`
+`agent-mcps add <server-id> [--target /path] [-a <agent>]... [--global] [-y]`
 4. Full sync:
-`agent-mcps sync [--target /path] [-a <agent>]... [-y]`
+`agent-mcps sync [--target /path] [-a <agent>]... [--global] [-y]`
 
 ## Generated targets (under selected target path)
 
@@ -91,6 +93,16 @@ cd /absolute/path/to/project
 3. Existing files are updated in place:
 `<target>/.mcp.json`, `<target>/.cursor/mcp.json`, `<target>/.codex/config.toml`.
 4. `sync` mode rewrites the managed client config files deterministically from the enabled catalog.
+
+## Global flag behavior
+
+1. `--global` runs extra global setup for selected agents in addition to normal project-local setup.
+2. Currently implemented global setup:
+`codex` only.
+3. For `codex`, `--global` upserts selected/additional catalog servers into:
+`~/.codex/config.toml`.
+4. For agents without global setup support yet, the tool prints:
+`No global setup implemented yet for: ...`
 
 ## Catalog format
 

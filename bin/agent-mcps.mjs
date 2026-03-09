@@ -19,14 +19,15 @@ function printUsage() {
   console.log(`agent-mcps
 
 Usage:
-  agent-mcps add <server-id> [--target /path] [-a <agent>]... [-y]
+  agent-mcps add <server-id> [--target /path] [-a <agent>]... [--global] [-y]
   agent-mcps list [--json]
-  agent-mcps sync [--target /path] [-a <agent>]... [-y]
+  agent-mcps sync [--target /path] [-a <agent>]... [--global] [-y]
   agent-mcps validate
 
 Notes:
   - If --target is omitted for add/sync, current directory is used.
   - If no -a flags are given in a TTY, an interactive selector is shown.
+  - --global applies agent-specific global setup (currently Codex).
 `);
 }
 

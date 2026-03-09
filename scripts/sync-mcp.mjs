@@ -13,6 +13,7 @@ import {
 } from "./lib/common.mjs";
 import { loadCatalog, sortServersById, validateCatalog } from "./lib/catalog.mjs";
 import { buildManagedCodexConfig } from "./lib/codex-config.mjs";
+import { applyGlobalActions } from "./lib/global-actions.mjs";
 import { selectAgentsInteractive } from "./lib/interactive.mjs";
 import { writeCodexWrappers } from "./lib/wrappers.mjs";
 import { renderClaudeConfig } from "./renderers/claude.mjs";
@@ -20,7 +21,7 @@ import { renderCodexServersById } from "./renderers/codex.mjs";
 import { renderCursorConfig } from "./renderers/cursor.mjs";
 
 function usage() {
-  console.log("Usage: agent-mcps sync [--target /path] [-a <agent>]... [-y]");
+  console.log("Usage: agent-mcps sync [--target /path] [-a <agent>]... [--global] [-y]");
 }
 
 const { positionals, options } = parseCliArgs(process.argv.slice(2));
@@ -34,6 +35,7 @@ if (positionals.length > 0) {
 }
 
 const targetPath = parseTargetPath(options.target, { defaultToCwd: true });
+const useGlobal = Boolean(options.global || options.g);
 if (options.clients) {
   fail("`--clients` is not supported. Use `-a <agent>` for each target agent.");
 }
@@ -65,6 +67,7 @@ if (validationErrors.length > 0) {
 
 const enabledServers = sortServersById(catalog.servers.filter((s) => s.enabled));
 const written = [];
+let codexServersForGlobal = [];
 
 if (selectedClients.includes("claude")) {
   const servers = enabledServers.filter((server) => serverSupportsClient(server, "claude"));
@@ -84,6 +87,7 @@ if (selectedClients.includes("cursor")) {
 
 if (selectedClients.includes("codex")) {
   const servers = enabledServers.filter((server) => serverSupportsClient(server, "codex"));
+  codexServersForGlobal = servers;
   const byId = renderCodexServersById(servers);
   const toml = buildManagedCodexConfig(byId);
   const filePath = path.join(targetPath, ".codex", "config.toml");
@@ -95,4 +99,23 @@ if (selectedClients.includes("codex")) {
 console.log(`Synced ${enabledServers.length} enabled server(s) to ${targetPath}.`);
 for (const filePath of written) {
   console.log(`- ${filePath}`);
+}
+
+if (useGlobal) {
+  const { written: globalWritten, unsupported } = await applyGlobalActions({
+    mode: "sync",
+    selectedAgents: selectedClients,
+    codexServers: codexServersForGlobal
+  });
+
+  if (globalWritten.length > 0) {
+    console.log("Global updates:");
+    for (const filePath of globalWritten) {
+      console.log(`- ${filePath}`);
+    }
+  }
+
+  if (unsupported.length > 0) {
+    console.log(`No global setup implemented yet for: ${unsupported.join(", ")}`);
+  }
 }
