@@ -2,6 +2,8 @@
 
 Project-local MCP catalog and installers for Claude, Codex, and Cursor.
 
+Catalog: [catalog/README.md](catalog/README.md)
+
 ## Install
 
 ### Option A: clone + global link (recommended)
