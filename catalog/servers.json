@@ -19,6 +19,24 @@
       "versionPolicy": "pinned"
     },
     {
+      "id": "playwright",
+      "description": "Official Playwright MCP server for browser automation and testing workflows.",
+      "transport": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@0.0.68"
+      ],
+      "envVars": [],
+      "clients": [
+        "claude",
+        "codex",
+        "cursor"
+      ],
+      "enabled": true,
+      "versionPolicy": "pinned"
+    },
+    {
       "id": "svelte",
       "description": "Official Svelte MCP server for Svelte and SvelteKit docs, autofixes, and playground links.",
       "transport": "stdio",
